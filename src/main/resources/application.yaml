@@ -11,3 +11,19 @@ eureka:
 spring:
   application:
     name: gateway-service
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: update
+          uri: lb://CLIENT-UPDATER
+          predicates:
+            - Path=/api/update/**
+        - id: update
+          uri: lb://client-updater
+          predicates:
+            - Path=/api/update/**
